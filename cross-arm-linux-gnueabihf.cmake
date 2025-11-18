@@ -7,15 +7,17 @@
 #
 #/opt/exorintos/1.5.3/sysroots/cortexa8hf-vfp-neon-poky-linux-gnueabi/lib/
 #/opt/exorintos/1.5.3/sysroots/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi
-set(CROSS_PATH /opt/exorintos/1.5.3/sysroots)
-
+set(CROSS_PATH /opt/exorintos-3.x.x/3.x.x/sysroots)
+set(SDKTARGETSYSROOT ${CROSS_PATH}/cortexa9t2hf-neon-poky-linux-gnueabi)
+set(CMAKE_FIND_ROOT_PATH  ${SDKTARGETSYSROOT})
 # Target operating system name.
 set(CMAKE_SYSTEM_NAME Linux)
 
 # Name of C compiler.
-set(CMAKE_C_COMPILER "${CROSS_PATH}/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc")
-set(CMAKE_CXX_COMPILER "${CROSS_PATH}/i686-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++")
-
+set(CMAKE_C_COMPILER "${CROSS_PATH}/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-gcc")
+set(CMAKE_CXX_COMPILER "${CROSS_PATH}/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-g++")
+set(CMAKE_C_FLAGS "-mcpu=cortex-a9 -mfloat-abi=hard --sysroot=${SDKTARGETSYSROOT}")
+set(CMAKE_CXX_FLAGS "-mcpu=cortex-a9 -mfloat-abi=hard --sysroot=${SDKTARGETSYSROOT}")
 #
 # Different build system distros set release optimization level to different
 # things according to their local policy, eg, Fedora is -O2 and Ubuntu is -O3
@@ -33,8 +35,8 @@ if (CMAKE_BUILD_TYPE MATCHES RELEASE OR CMAKE_BUILD_TYPE MATCHES Release OR CMAK
 endif()
 
 # Where to look for the target environment. (More paths can be added here)
-set(CMAKE_PREFIX_PATH "${CROSS_PATH}/cortexa8hf-vfp-neon-poky-linux-gnueabi/")
-set(CMAKE_LIBRARY_PATH "${CROSS_PATH}/cortexa8hf-vfp-neon-poky-linux-gnueabi/lib/")
+set(CMAKE_PREFIX_PATH "${CROSS_PATH}/cortexa9t2hf-neon-poky-linux-gnueabi/")
+set(CMAKE_LIBRARY_PATH "${CROSS_PATH}/cortexa9t2hf-neon-poky-linux-gnueabi/lib/")
 
 # Adjust the default behavior of the FIND_XXX() commands:
 # search programs in the host environment only.
